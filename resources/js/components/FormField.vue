@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="w-full py-6 px-8">
+        <div class="w-full pt-2 px-8 -mb-6">
             <a
-                class="inline-block font-bold cursor-pointer mr-2 animate-text-color select-none"
-                :class="{ 'text-60': localeKey !== currentLocale, 'text-primary border-b-2': localeKey === currentLocale }"
+                class="inline-block cursor-pointer mr-2 animate-text-color select-none font-xs"
+                :class="{ 'text-60': localeKey !== currentLocale, 'text-primary': localeKey === currentLocale, 'font-bold': localeKey === currentLocale }"
                 :key="`a-${localeKey}`"
                 v-for="(locale, localeKey) in locales"
                 @click="changeLocale(localeKey)"
