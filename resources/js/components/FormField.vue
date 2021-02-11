@@ -42,10 +42,6 @@
             }
         },
 
-        mounted() {
-            this.currentLocale = Object.keys(this.locales)[0] || null;
-        },
-
         methods: {
             /**
              * Set the initial, internal value for the field.
@@ -58,8 +54,13 @@
             },
 
             changeLocale(locale) {
+            	this.$bus.$emit('change-locale', locale)
                 this.currentLocale = locale;
             },
+
+			syncChangeLocale(locale) {
+				this.currentLocale = locale;
+			},
 
             /**
              * Fill the given FormData object with the field's internal value.
@@ -71,5 +72,10 @@
                 });
             },
         },
+
+		mounted() {
+			this.currentLocale = Object.keys(this.locales)[0] || null;
+			this.$bus.$on('change-locale', this.syncChangeLocale)
+		},
     }
 </script>

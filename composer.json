@@ -1,5 +1,5 @@
 {
-    "name": "soluzione-software/nova-translatable-field",
+    "name": "kreatorij/nova-translatable-field",
     "description": "A Laravel Nova field.",
     "keywords": [
         "laravel",
@@ -13,13 +13,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SoluzioneSoftware\\Nova\\Fields\\": "src/"
+            "Kreatorij\\Nova\\Fields\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "SoluzioneSoftware\\Nova\\Fields\\TranslatableFieldServiceProvider"
+                "Kreatorij\\Nova\\Fields\\TranslatableFieldServiceProvider"
             ]
         }
     },

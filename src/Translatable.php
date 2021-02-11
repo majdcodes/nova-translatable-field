@@ -1,6 +1,6 @@
 <?php
 
-namespace SoluzioneSoftware\Nova\Fields;
+namespace Kreatorij\Nova\Fields;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
