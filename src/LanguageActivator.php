@@ -4,6 +4,7 @@ namespace Kreatorij\Nova\Fields;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Nova\Fields\BooleanGroup;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -24,6 +25,13 @@ class LanguageActivator extends Field
     /** @var array */
     private $fields;
 
+	/**
+	 * The options for the field.
+	 *
+	 * @var array
+	 */
+	public $options;
+
     /**
      * Create a new field.
      *
@@ -41,6 +49,8 @@ class LanguageActivator extends Field
 
         $fields = array_map(function ($locale) use ($field) {return $this->localizeField(clone $field, $locale);}, $locales);
         $this->fields = array_combine($locales, $fields);
+
+//		$this->options($this->locales);
 
         $this->withMeta([
             'locales' => $this->locales,
@@ -100,6 +110,29 @@ class LanguageActivator extends Field
         return is_null($attribute) ? null : "translatable_{$locale}_{$attribute}";
     }
 
+	/**
+	 * Set the options for the field.
+	 *
+	 * @param  array|\Closure|\Illuminate\Support\Collection
+	 * @return $this
+	 */
+	public function options($options)
+	{
+		if (is_callable($options)) {
+			$options = $options();
+		}
+
+		$this->options = with(collect($options), function ($options) {
+			return $options->map(function ($label, $name) use ($options) {
+				return $options->isAssoc()
+					? ['label' => $label, 'name' => $name]
+					: ['label' => $label, 'name' => $label];
+			})->values()->all();
+		});
+
+		return $this;
+	}
+
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
@@ -152,6 +185,7 @@ class LanguageActivator extends Field
             'nullable' => $this->nullable,
             'readonly' => $this->isReadonly(app(NovaRequest::class)),
             'textAlign' => $this->textAlign,
+//			'options' => $this->options,
         ], $this->meta());
     }
 

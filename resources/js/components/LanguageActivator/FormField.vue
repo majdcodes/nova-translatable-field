@@ -22,6 +22,15 @@
                 :ref="'field-' + localizedField.attribute"
             />
         </template>
+
+<!--		<component-->
+<!--			v-show="localeKey === currentLocale"-->
+<!--			:is="'form-boolean-group-field'"-->
+<!--			:resource-id="resourceId"-->
+<!--			:resource-name="resourceName"-->
+<!--			:field="field"-->
+<!--			:ref="'field-' + localizedField.attribute"-->
+<!--		/>-->
     </div>
 </template>
 
@@ -74,6 +83,7 @@
         },
 
 		mounted() {
+        	console.log(this.fields)
 			this.currentLocale = Object.keys(this.locales)[0] || null;
 			this.$bus.$on('change-locale', this.syncChangeLocale)
 		},

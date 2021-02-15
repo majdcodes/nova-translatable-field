@@ -27371,6 +27371,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -27424,6 +27433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
+        console.log(this.fields);
         this.currentLocale = Object.keys(this.locales)[0] || null;
         this.$bus.$on('change-locale', this.syncChangeLocale);
     }
@@ -27461,7 +27471,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("\n            " + _vm._s(locale) + "\n        ")]
+            [_vm._v("\n                " + _vm._s(locale) + "\n            ")]
           )
         }),
         0
