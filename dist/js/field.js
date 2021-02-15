@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,449 +174,6 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(2);
-module.exports = __webpack_require__(13);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Nova.booting(function (Vue, router, store) {
-    Vue.component('index-translatable-field', __webpack_require__(3));
-    Vue.component('detail-translatable-field', __webpack_require__(6));
-    Vue.component('form-translatable-field', __webpack_require__(9));
-
-    Vue.prototype.$bus = new Vue();
-});
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(4)
-/* template */
-var __vue_template__ = __webpack_require__(5)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/IndexField.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9e63f81a", Component.options)
-  } else {
-    hotAPI.reload("data-v-9e63f81a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resourceName', 'field'],
-
-    data: function data() {
-        return {
-            originalField: this.field.originalField,
-            indexLocale: this.field.indexLocale
-        };
-    },
-
-
-    computed: {
-        localizedField: function localizedField() {
-            return this.field.fields[this.indexLocale];
-        }
-    }
-});
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("index-" + _vm.originalField.component, {
-    tag: "component",
-    attrs: { field: _vm.localizedField, "resource-name": _vm.resourceName }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-9e63f81a", module.exports)
-  }
-}
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(7)
-/* template */
-var __vue_template__ = __webpack_require__(8)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/DetailField.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0224618e", Component.options)
-  } else {
-    hotAPI.reload("data-v-0224618e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
-
-    data: function data() {
-        return {
-            currentLocale: null,
-            locales: this.field.locales,
-            fields: this.field.fields
-        };
-    },
-
-
-    /**
-     * Mount the component.
-     */
-    mounted: function mounted() {
-        this.currentLocale = Object.keys(this.locales)[0] || null;
-    },
-
-
-    methods: {
-        changeLocale: function changeLocale(locale) {
-            if (this.currentLocale !== locale) {
-                this.currentLocale = locale;
-            }
-        }
-    }
-});
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        { staticClass: "w-full py-6" },
-        _vm._l(_vm.field.locales, function(locale, localeKey) {
-          return _c(
-            "a",
-            {
-              key: "a-" + localeKey,
-              staticClass:
-                "inline-block font-bold cursor-pointer mr-2 animate-text-color select-none",
-              class: {
-                "text-60": localeKey !== _vm.currentLocale,
-                "text-primary border-b-2": localeKey === _vm.currentLocale
-              },
-              on: {
-                click: function($event) {
-                  return _vm.changeLocale(localeKey)
-                }
-              }
-            },
-            [_vm._v("\n            " + _vm._s(locale) + "\n        ")]
-          )
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.field.fields, function(originalField, localeKey) {
-        return [
-          _c("detail-" + originalField.component, {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: localeKey === _vm.currentLocale,
-                expression: "localeKey === currentLocale"
-              }
-            ],
-            tag: "component",
-            attrs: {
-              field: originalField,
-              "resource-id": originalField.resourceId,
-              "resource-name": originalField.resourceName
-            }
-          })
-        ]
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0224618e", module.exports)
-  }
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(10)
-/* template */
-var __vue_template__ = __webpack_require__(12)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/FormField.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c023248a", Component.options)
-  } else {
-    hotAPI.reload("data-v-c023248a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"]],
-
-    props: ['resourceName', 'resourceId', 'field'],
-
-    data: function data() {
-        return {
-            locales: this.field.locales,
-            currentLocale: null,
-            fields: this.field.fields,
-            originalField: this.field.originalField
-        };
-    },
-
-
-    methods: {
-        /**
-         * Set the initial, internal value for the field.
-         */
-        setInitialValue: function setInitialValue() {
-            var _this = this;
-
-            Object.values(this.fields).forEach(function (f) {
-                var field = _this.$refs['field-' + f.attribute][0];
-                field.setInitialValue();
-            });
-        },
-        changeLocale: function changeLocale(locale) {
-            this.$bus.$emit('change-locale', locale);
-            this.currentLocale = locale;
-        },
-        syncChangeLocale: function syncChangeLocale(locale) {
-            this.currentLocale = locale;
-        },
-
-
-        /**
-         * Fill the given FormData object with the field's internal value.
-         */
-        fill: function fill(formData) {
-            var _this2 = this;
-
-            Object.values(this.fields).forEach(function (f) {
-                var field = _this2.$refs['field-' + f.attribute][0];
-                field.fill(formData);
-            });
-        }
-    },
-
-    mounted: function mounted() {
-        this.currentLocale = Object.keys(this.locales)[0] || null;
-        this.$bus.$on('change-locale', this.syncChangeLocale);
-    }
-});
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -26886,6 +26443,466 @@ if (hadRuntime) {
 });
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(22);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Nova.booting(function (Vue, router, store) {
+			// Translatable field
+			Vue.component('index-translatable-field', __webpack_require__(4));
+			Vue.component('detail-translatable-field', __webpack_require__(7));
+			Vue.component('form-translatable-field', __webpack_require__(10));
+
+			// Language activator
+			Vue.component('index-language-activator', __webpack_require__(13));
+			Vue.component('detail-language-activator', __webpack_require__(16));
+			Vue.component('form-language-activator', __webpack_require__(19));
+
+			Vue.prototype.$bus = new Vue();
+});
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(5)
+/* template */
+var __vue_template__ = __webpack_require__(6)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TranslatableField/IndexField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-617e5f0e", Component.options)
+  } else {
+    hotAPI.reload("data-v-617e5f0e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resourceName', 'field'],
+
+    data: function data() {
+        return {
+            originalField: this.field.originalField,
+            indexLocale: this.field.indexLocale
+        };
+    },
+
+
+    computed: {
+        localizedField: function localizedField() {
+            return this.field.fields[this.indexLocale];
+        }
+    }
+});
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("index-" + _vm.originalField.component, {
+    tag: "component",
+    attrs: { field: _vm.localizedField, "resource-name": _vm.resourceName }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-617e5f0e", module.exports)
+  }
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(8)
+/* template */
+var __vue_template__ = __webpack_require__(9)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TranslatableField/DetailField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9be9b470", Component.options)
+  } else {
+    hotAPI.reload("data-v-9be9b470", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resource', 'resourceName', 'resourceId', 'field'],
+
+    data: function data() {
+        return {
+            currentLocale: null,
+            locales: this.field.locales,
+            fields: this.field.fields
+        };
+    },
+
+
+    methods: {
+        changeLocale: function changeLocale(locale) {
+            if (this.currentLocale !== locale) {
+                this.$bus.$emit('change-locale', locale);
+                this.currentLocale = locale;
+            }
+        },
+        syncChangeLocale: function syncChangeLocale(locale) {
+            this.currentLocale = locale;
+        }
+    },
+
+    /**
+     * Mount the component.
+     */
+    mounted: function mounted() {
+        this.currentLocale = Object.keys(this.locales)[0] || null;
+        this.$bus.$on('change-locale', this.syncChangeLocale);
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.$bus.$off('change-locale');
+    }
+});
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "w-full pt-2 -mb-2 relative z-10" },
+        _vm._l(_vm.locales, function(locale, localeKey) {
+          return _c(
+            "a",
+            {
+              key: "a-" + localeKey,
+              staticClass:
+                "inline-block cursor-pointer mr-2 animate-text-color select-none text-xs",
+              class: {
+                "text-60": localeKey !== _vm.currentLocale,
+                "text-primary": localeKey === _vm.currentLocale,
+                "font-bold": localeKey === _vm.currentLocale
+              },
+              on: {
+                click: function($event) {
+                  return _vm.changeLocale(localeKey)
+                }
+              }
+            },
+            [_vm._v("\n\t\t\t\t" + _vm._s(locale) + "\n\t\t\t")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.field.fields, function(originalField, localeKey) {
+        return [
+          _c("detail-" + originalField.component, {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: localeKey === _vm.currentLocale,
+                expression: "localeKey === currentLocale"
+              }
+            ],
+            tag: "component",
+            attrs: {
+              field: originalField,
+              "resource-id": originalField.resourceId,
+              "resource-name": originalField.resourceName
+            }
+          })
+        ]
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9be9b470", module.exports)
+  }
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(11)
+/* template */
+var __vue_template__ = __webpack_require__(12)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TranslatableField/FormField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d4cf875", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d4cf875", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"]],
+
+    props: ['resourceName', 'resourceId', 'field'],
+
+    data: function data() {
+        return {
+            locales: this.field.locales,
+            currentLocale: null,
+            fields: this.field.fields,
+            originalField: this.field.originalField
+        };
+    },
+
+
+    methods: {
+        /**
+         * Set the initial, internal value for the field.
+         */
+        setInitialValue: function setInitialValue() {
+            var _this = this;
+
+            Object.values(this.fields).forEach(function (f) {
+                var field = _this.$refs['field-' + f.attribute][0];
+                field.setInitialValue();
+            });
+        },
+        changeLocale: function changeLocale(locale) {
+            this.$bus.$emit('change-locale', locale);
+            this.currentLocale = locale;
+        },
+        syncChangeLocale: function syncChangeLocale(locale) {
+            this.currentLocale = locale;
+        },
+
+
+        /**
+         * Fill the given FormData object with the field's internal value.
+         */
+        fill: function fill(formData) {
+            var _this2 = this;
+
+            Object.values(this.fields).forEach(function (f) {
+                var field = _this2.$refs['field-' + f.attribute][0];
+                field.fill(formData);
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.currentLocale = Object.keys(this.locales)[0] || null;
+        this.$bus.$on('change-locale', this.syncChangeLocale);
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.$bus.$off('change-locale');
+    }
+});
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26955,12 +26972,539 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c023248a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2d4cf875", module.exports)
   }
 }
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(14)
+/* template */
+var __vue_template__ = __webpack_require__(15)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/LanguageActivator/IndexField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-713969f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-713969f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resourceName', 'field'],
+
+    data: function data() {
+        return {
+            originalField: this.field.originalField,
+            indexLocale: this.field.indexLocale,
+            locales: this.field.locales
+        };
+    },
+
+
+    computed: {
+        localizedField: function localizedField() {
+            return this.field.fields[this.indexLocale];
+        }
+    }
+
+    // mounted() {
+    // 	console.log(this.field)
+    // }
+});
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.field.fields, function(field_locale, locale) {
+      return _c("span", {
+        key: locale,
+        staticClass: "text-sm uppercase pr-1 text-gray-400",
+        class: {
+          "font-bold": field_locale.value,
+          "text-gray-800": field_locale.value
+        },
+        domProps: { textContent: _vm._s(locale) }
+      })
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-713969f6", module.exports)
+  }
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(17)
+/* template */
+var __vue_template__ = __webpack_require__(18)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/LanguageActivator/DetailField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83900688", Component.options)
+  } else {
+    hotAPI.reload("data-v-83900688", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resource', 'resourceName', 'resourceId', 'field'],
+
+    data: function data() {
+        return {
+            currentLocale: null,
+            locales: this.field.locales,
+            fields: this.field.fields
+        };
+    },
+
+
+    methods: {
+        changeLocale: function changeLocale(locale) {
+            if (this.currentLocale !== locale) {
+                this.$bus.$emit('change-locale', locale);
+                this.currentLocale = locale;
+            }
+        },
+        syncChangeLocale: function syncChangeLocale(locale) {
+            this.currentLocale = locale;
+        }
+    },
+
+    /**
+     * Mount the component.
+     */
+    mounted: function mounted() {
+        this.currentLocale = Object.keys(this.locales)[0] || null;
+        this.$bus.$on('change-locale', this.syncChangeLocale);
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.$bus.$off('change-locale');
+    }
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "w-full pt-2 -mb-2 relative z-10" },
+        _vm._l(_vm.locales, function(locale, localeKey) {
+          return _c(
+            "a",
+            {
+              key: "a-" + localeKey,
+              staticClass:
+                "inline-block cursor-pointer mr-2 animate-text-color select-none text-xs",
+              class: {
+                "text-60": localeKey !== _vm.currentLocale,
+                "text-primary": localeKey === _vm.currentLocale,
+                "font-bold": localeKey === _vm.currentLocale
+              },
+              on: {
+                click: function($event) {
+                  return _vm.changeLocale(localeKey)
+                }
+              }
+            },
+            [_vm._v("\n\t\t\t\t" + _vm._s(locale) + "\n\t\t\t")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.field.fields, function(originalField, localeKey) {
+        return [
+          _c("detail-" + originalField.component, {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: localeKey === _vm.currentLocale,
+                expression: "localeKey === currentLocale"
+              }
+            ],
+            tag: "component",
+            attrs: {
+              field: originalField,
+              "resource-id": originalField.resourceId,
+              "resource-name": originalField.resourceName
+            }
+          })
+        ]
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-83900688", module.exports)
+  }
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(20)
+/* template */
+var __vue_template__ = __webpack_require__(21)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/LanguageActivator/FormField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ae2a072e", Component.options)
+  } else {
+    hotAPI.reload("data-v-ae2a072e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"]],
+
+    props: ['resourceName', 'resourceId', 'field'],
+
+    data: function data() {
+        return {
+            locales: this.field.locales,
+            currentLocale: null,
+            fields: this.field.fields,
+            originalField: this.field.originalField
+        };
+    },
+
+
+    methods: {
+        /**
+         * Set the initial, internal value for the field.
+         */
+        setInitialValue: function setInitialValue() {
+            var _this = this;
+
+            Object.values(this.fields).forEach(function (f) {
+                var field = _this.$refs['field-' + f.attribute][0];
+                field.setInitialValue();
+            });
+        },
+        changeLocale: function changeLocale(locale) {
+            this.$bus.$emit('change-locale', locale);
+            this.currentLocale = locale;
+        },
+        syncChangeLocale: function syncChangeLocale(locale) {
+            this.currentLocale = locale;
+        },
+
+
+        /**
+         * Fill the given FormData object with the field's internal value.
+         */
+        fill: function fill(formData) {
+            var _this2 = this;
+
+            Object.values(this.fields).forEach(function (f) {
+                var field = _this2.$refs['field-' + f.attribute][0];
+                field.fill(formData);
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.currentLocale = Object.keys(this.locales)[0] || null;
+        this.$bus.$on('change-locale', this.syncChangeLocale);
+    }
+});
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "w-full pt-2 px-8 -mb-6 relative z-10" },
+        _vm._l(_vm.locales, function(locale, localeKey) {
+          return _c(
+            "a",
+            {
+              key: "a-" + localeKey,
+              staticClass:
+                "inline-block cursor-pointer mr-2 animate-text-color select-none text-xs",
+              class: {
+                "text-60": localeKey !== _vm.currentLocale,
+                "text-primary": localeKey === _vm.currentLocale,
+                "font-bold": localeKey === _vm.currentLocale
+              },
+              on: {
+                click: function($event) {
+                  return _vm.changeLocale(localeKey)
+                }
+              }
+            },
+            [_vm._v("\n            " + _vm._s(locale) + "\n        ")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.fields, function(localizedField, localeKey) {
+        return [
+          _c("form-" + localizedField.component, {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: localeKey === _vm.currentLocale,
+                expression: "localeKey === currentLocale"
+              }
+            ],
+            ref: "field-" + localizedField.attribute,
+            refInFor: true,
+            tag: "component",
+            attrs: {
+              "resource-id": _vm.resourceId,
+              "resource-name": _vm.resourceName,
+              field: localizedField
+            }
+          })
+        ]
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ae2a072e", module.exports)
+  }
+}
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

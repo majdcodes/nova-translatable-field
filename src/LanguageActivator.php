@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Translatable extends Field
+class LanguageActivator extends Field
 {
     /**
      * The field's component.
      *
      * @var string
      */
-    public $component = 'translatable-field';
+    public $component = 'language-activator';
 
     private $locales = [];
 
@@ -39,9 +39,7 @@ class Translatable extends Field
 		}, $locales));
         $this->field = $field;
 
-        $fields = array_map(function ($locale) use ($field) {
-        	return $this->localizeField(clone $field, $locale);
-		}, $locales);
+        $fields = array_map(function ($locale) use ($field) {return $this->localizeField(clone $field, $locale);}, $locales);
         $this->fields = array_combine($locales, $fields);
 
         $this->withMeta([
@@ -118,9 +116,10 @@ class Translatable extends Field
 
         foreach ($this->locales as $localeCode => $locale) {
             $value = $request->get($this->localizeAttribute($localeCode, $requestAttribute));
-			if ($value === 'true') {
-				$value = true;
+            if ($value === 'true') {
+            	$value = true;
 			}
+
             if (is_null($value)){
                 continue;
             }
