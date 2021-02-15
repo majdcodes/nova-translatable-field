@@ -26455,17 +26455,20 @@ module.exports = __webpack_require__(22);
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router, store) {
-			// Translatable field
-			Vue.component('index-translatable-field', __webpack_require__(4));
-			Vue.component('detail-translatable-field', __webpack_require__(7));
-			Vue.component('form-translatable-field', __webpack_require__(10));
+	Vue.config.productionTip = false;
+	Vue.config.devtools = true;
 
-			// Language activator
-			Vue.component('index-language-activator', __webpack_require__(13));
-			Vue.component('detail-language-activator', __webpack_require__(16));
-			Vue.component('form-language-activator', __webpack_require__(19));
+	// Translatable field
+	Vue.component('index-translatable-field', __webpack_require__(4));
+	Vue.component('detail-translatable-field', __webpack_require__(7));
+	Vue.component('form-translatable-field', __webpack_require__(10));
 
-			Vue.prototype.$bus = new Vue();
+	// Language activator
+	Vue.component('index-language-activator', __webpack_require__(13));
+	Vue.component('detail-language-activator', __webpack_require__(16));
+	Vue.component('form-language-activator', __webpack_require__(19));
+
+	Vue.prototype.$bus = new Vue();
 });
 
 /***/ }),
@@ -27062,9 +27065,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 
-    // mounted() {
-    // 	console.log(this.field)
-    // }
 });
 
 /***/ }),
@@ -27167,54 +27167,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
+	props: ['resource', 'resourceName', 'resourceId', 'field'],
 
-    data: function data() {
-        return {
-            currentLocale: null,
-            locales: this.field.locales,
-            fields: this.field.fields
-        };
-    },
+	data: function data() {
+		return {
+			currentLocale: null,
+			locales: this.field.locales,
+			fields: this.field.fields,
+			customField: this.field,
+			inited: false
+		};
+	},
 
 
-    methods: {
-        changeLocale: function changeLocale(locale) {
-            if (this.currentLocale !== locale) {
-                this.$bus.$emit('change-locale', locale);
-                this.currentLocale = locale;
-            }
-        },
-        syncChangeLocale: function syncChangeLocale(locale) {
-            this.currentLocale = locale;
-        }
-    },
+	/**
+  * Mount the component.
+  */
+	mounted: function mounted() {
+		var _this = this;
 
-    /**
-     * Mount the component.
-     */
-    mounted: function mounted() {
-        this.currentLocale = Object.keys(this.locales)[0] || null;
-        this.$bus.$on('change-locale', this.syncChangeLocale);
-    },
-    beforeDestroy: function beforeDestroy() {
-        this.$bus.$off('change-locale');
-    }
+		Object.values(this.fields).forEach(function (f) {
+			if (f.value) {
+				if (!_this.customField.value) {
+					_this.$set(_this.customField, 'value', {});
+				}
+				_this.$set(_this.customField.value, f.attribute, f.value);
+			}
+		});
+		this.inited = true;
+	}
 });
 
 /***/ }),
@@ -27228,55 +27211,19 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "div",
-        { staticClass: "w-full pt-2 -mb-2 relative z-10" },
-        _vm._l(_vm.locales, function(locale, localeKey) {
-          return _c(
-            "a",
-            {
-              key: "a-" + localeKey,
-              staticClass:
-                "inline-block cursor-pointer mr-2 animate-text-color select-none text-xs",
-              class: {
-                "text-60": localeKey !== _vm.currentLocale,
-                "text-primary": localeKey === _vm.currentLocale,
-                "font-bold": localeKey === _vm.currentLocale
-              },
-              on: {
-                click: function($event) {
-                  return _vm.changeLocale(localeKey)
-                }
-              }
-            },
-            [_vm._v("\n\t\t\t\t" + _vm._s(locale) + "\n\t\t\t")]
-          )
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.field.fields, function(originalField, localeKey) {
-        return [
-          _c("detail-" + originalField.component, {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: localeKey === _vm.currentLocale,
-                expression: "localeKey === currentLocale"
-              }
-            ],
+      _vm.inited
+        ? _c("detail-boolean-group-field", {
+            ref: "field-" + _vm.field.attribute,
             tag: "component",
             attrs: {
-              field: originalField,
-              "resource-id": originalField.resourceId,
-              "resource-name": originalField.resourceName
+              "resource-id": _vm.resourceId,
+              "resource-name": _vm.resourceName,
+              field: _vm.customField
             }
           })
-        ]
-      })
+        : _vm._e()
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -27356,30 +27303,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -27406,16 +27329,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             Object.values(this.fields).forEach(function (f) {
-                var field = _this.$refs['field-' + f.attribute][0];
-                field.setInitialValue();
+                _this.$set(_this.field.value, f.attribute, f.value);
             });
-        },
-        changeLocale: function changeLocale(locale) {
-            this.$bus.$emit('change-locale', locale);
-            this.currentLocale = locale;
-        },
-        syncChangeLocale: function syncChangeLocale(locale) {
-            this.currentLocale = locale;
+            this.$refs['field-' + this.field.attribute].setInitialValue();
         },
 
 
@@ -27423,19 +27339,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
-            var _this2 = this;
-
-            Object.values(this.fields).forEach(function (f) {
-                var field = _this2.$refs['field-' + f.attribute][0];
-                field.fill(formData);
-            });
+            var field = this.$refs['field-' + this.field.attribute];
+            field.fill(formData);
         }
-    },
-
-    mounted: function mounted() {
-        console.log(this.fields);
-        this.currentLocale = Object.keys(this.locales)[0] || null;
-        this.$bus.$on('change-locale', this.syncChangeLocale);
     }
 });
 
@@ -27450,57 +27356,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "div",
-        { staticClass: "w-full pt-2 px-8 -mb-6 relative z-10" },
-        _vm._l(_vm.locales, function(locale, localeKey) {
-          return _c(
-            "a",
-            {
-              key: "a-" + localeKey,
-              staticClass:
-                "inline-block cursor-pointer mr-2 animate-text-color select-none text-xs",
-              class: {
-                "text-60": localeKey !== _vm.currentLocale,
-                "text-primary": localeKey === _vm.currentLocale,
-                "font-bold": localeKey === _vm.currentLocale
-              },
-              on: {
-                click: function($event) {
-                  return _vm.changeLocale(localeKey)
-                }
-              }
-            },
-            [_vm._v("\n                " + _vm._s(locale) + "\n            ")]
-          )
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.fields, function(localizedField, localeKey) {
-        return [
-          _c("form-" + localizedField.component, {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: localeKey === _vm.currentLocale,
-                expression: "localeKey === currentLocale"
-              }
-            ],
-            ref: "field-" + localizedField.attribute,
-            refInFor: true,
-            tag: "component",
-            attrs: {
-              "resource-id": _vm.resourceId,
-              "resource-name": _vm.resourceName,
-              field: localizedField
-            }
-          })
-        ]
+      _c("form-boolean-group-field", {
+        ref: "field-" + _vm.field.attribute,
+        tag: "component",
+        attrs: {
+          "resource-id": _vm.resourceId,
+          "resource-name": _vm.resourceName,
+          field: _vm.field
+        }
       })
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

@@ -47,15 +47,22 @@ class LanguageActivator extends Field
 		}, $locales));
         $this->field = $field;
 
-        $fields = array_map(function ($locale) use ($field) {return $this->localizeField(clone $field, $locale);}, $locales);
+        $fields = array_map(function ($locale) use ($field) {
+        	return $this->localizeField(clone $field, $locale);
+		}, $locales);
         $this->fields = array_combine($locales, $fields);
 
-//		$this->options($this->locales);
+		$options = [];
+		foreach ($fields as $field_item) {
+			$options[$field_item->attribute] = strtoupper($field_item->locale);
+        }
+		$this->options($options);
 
         $this->withMeta([
             'locales' => $this->locales,
             'fields' => $this->fields,
             'originalField' => $this->field,
+			'options' => config('nova.nova-translatable-field.language_activation_field', [])
         ]);
 
         $this->indexLocale(app()->getLocale());
@@ -102,6 +109,7 @@ class LanguageActivator extends Field
     protected function localizeField(Field $field, string $locale)
     {
         $field->attribute = $this->localizeAttribute($locale, $field->attribute);
+		$field->locale = $locale;
         return $field;
     }
 
@@ -147,23 +155,27 @@ class LanguageActivator extends Field
         /** @var array $requestData */
         $requestData = $request->all();
 
-        foreach ($this->locales as $localeCode => $locale) {
-            $value = $request->get($this->localizeAttribute($localeCode, $requestAttribute));
-            if ($value === 'true') {
-            	$value = true;
+        if (!empty($requestData[config('nova.nova-translatable-field.language_activation_field')])) {
+        	$requestDataFixed = json_decode($requestData[config('nova.nova-translatable-field.language_activation_field')], true);
+
+			foreach ($this->locales as $localeCode => $locale) {
+				$value = $requestDataFixed[$this->localizeAttribute($localeCode, $requestAttribute)];
+				if ($value === 'true') {
+					$value = true;
+				}
+
+				if (is_null($value)){
+					continue;
+				}
+
+				$requestDataFixed[$requestAttribute] = $value;
+				$request->replace($requestDataFixed);
+
+				$model->setDefaultLocale($localeCode);
+
+				$this->field->fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
 			}
-
-            if (is_null($value)){
-                continue;
-            }
-
-            $requestData[$requestAttribute] = $value;
-            $request->replace($requestData);
-
-            $model->setDefaultLocale($localeCode);
-
-            $this->field->fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
-        }
+		}
     }
 
     /**
@@ -185,7 +197,7 @@ class LanguageActivator extends Field
             'nullable' => $this->nullable,
             'readonly' => $this->isReadonly(app(NovaRequest::class)),
             'textAlign' => $this->textAlign,
-//			'options' => $this->options,
+			'options' => $this->options,
         ], $this->meta());
     }
 

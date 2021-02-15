@@ -1,4 +1,7 @@
 Nova.booting((Vue, router, store) => {
+	Vue.config.productionTip = false;
+	Vue.config.devtools = true;
+
 	// Translatable field
     Vue.component('index-translatable-field', require('./components/TranslatableField/IndexField'))
     Vue.component('detail-translatable-field', require('./components/TranslatableField/DetailField'))

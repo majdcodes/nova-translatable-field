@@ -30,8 +30,5 @@
             }
         },
 
-	    // mounted() {
-        // 	console.log(this.field)
-	    // }
     }
 </script>

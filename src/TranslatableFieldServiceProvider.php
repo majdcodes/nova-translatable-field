@@ -19,6 +19,10 @@ class TranslatableFieldServiceProvider extends ServiceProvider
             Nova::script('translatable-field', __DIR__.'/../dist/js/field.js');
             Nova::style('translatable-field', __DIR__.'/../dist/css/field.css');
         });
+
+		$this->publishes([
+			__DIR__ . '/../config/nova-translatable-field.php' => config_path('nova/nova-translatable-field.php'),
+		], 'config');
     }
 
     /**
