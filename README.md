@@ -1,4 +1,4 @@
-# Nova Translatable Field and La guage Activator
+# Nova Translatable Field and Language Activator
 Adds the ability to show and edit translated fields created with [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) package. This is a fork of [soluzione-software/nova-translatable-field](https://github.com/soluzione-software/nova-translatable-field). It makes Boolean fields translatable, works on File fields, CKeditor, ... Language switching is synced on all fields by default.
 
 ## Installation and usage
@@ -12,7 +12,9 @@ use Kreatorij\Nova\Fields\Translatable;
 ```
 Use it on fieds like:
 ``` php
-Translatable::make(Text::make(__('Name'), 'name')),
+Translatable::make(
+	Text::make('Name', 'name')
+),
 ```
 
 ## Language Activator
