@@ -62,7 +62,7 @@ class LanguageActivator extends Field
             'locales' => $this->locales,
             'fields' => $this->fields,
             'originalField' => $this->field,
-			'options' => config('nova.nova-translatable-field.language_activation_field', [])
+			'options' => $this->options
         ]);
 
         $this->indexLocale(app()->getLocale());
