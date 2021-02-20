@@ -25,12 +25,6 @@ LanguageActivator::make(
 ),
 ```
 
-It is set by default to use `is_active` field, but you can do
-``` php
-php artisan vendor:publish
-```
-to publish config file and change the field in `language_activation_field` option.
-
 ## Credits
 Thanks to:
 - [@soluzione-software](https://github.com/soluzione-software) for [soluzione-software/nova-translatable-field](https://github.com/soluzione-software/nova-translatable-field)
