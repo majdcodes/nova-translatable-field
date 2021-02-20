@@ -4,7 +4,6 @@ namespace Kreatorij\Nova\Fields;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Nova\Fields\BooleanGroup;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -154,27 +153,25 @@ class LanguageActivator extends Field
     {
         /** @var array $requestData */
         $requestData = $request->all();
+		$requestDataFixed = json_decode($requestData[$requestAttribute], true);
 
-        if (!empty($requestData[config('nova.nova-translatable-field.language_activation_field')])) {
-        	$requestDataFixed = json_decode($requestData[config('nova.nova-translatable-field.language_activation_field')], true);
+		foreach ($this->locales as $localeCode => $locale) {
+			$value = $requestDataFixed[$this->localizeAttribute($localeCode, $requestAttribute)];
 
-			foreach ($this->locales as $localeCode => $locale) {
-				$value = $requestDataFixed[$this->localizeAttribute($localeCode, $requestAttribute)];
-				if ($value === 'true') {
-					$value = true;
-				}
-
-				if (is_null($value)){
-					continue;
-				}
-
-				$requestDataFixed[$requestAttribute] = $value;
-				$request->replace($requestDataFixed);
-
-				$model->setDefaultLocale($localeCode);
-
-				$this->field->fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
+			if ($value === 'true') {
+				$value = true;
 			}
+
+			if (is_null($value)){
+				continue;
+			}
+
+			$requestData[$requestAttribute] = $value;
+			$request->replace($requestData);
+
+			$model->setDefaultLocale($localeCode);
+
+			$this->field->fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
 		}
     }
 

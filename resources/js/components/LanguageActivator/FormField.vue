@@ -11,40 +11,42 @@
 </template>
 
 <script>
-    import { FormField, HandlesValidationErrors } from 'laravel-nova'
 
-    export default {
-        mixins: [FormField, HandlesValidationErrors],
+import { FormField, HandlesValidationErrors } from 'laravel-nova'
 
-        props: ['resourceName', 'resourceId', 'field'],
+export default {
+	mixins: [FormField, HandlesValidationErrors],
 
-        data() {
-            return {
-                locales: this.field.locales,
-                currentLocale: null,
-                fields: this.field.fields,
-                originalField: this.field.originalField,
-            }
-        },
+	props: ['resourceName', 'resourceId', 'field'],
 
-        methods: {
-            /**
-             * Set the initial, internal value for the field.
-             */
-            setInitialValue() {
-                Object.values(this.fields).forEach(f => {
-                	this.$set(this.field.value, f.attribute, f.value)
-                });
-				this.$refs['field-' + this.field.attribute].setInitialValue();
-            },
+	data() {
+		return {
+			locales: this.field.locales,
+			currentLocale: null,
+			fields: this.field.fields,
+			originalField: this.field.originalField,
+		}
+	},
 
-            /**
-             * Fill the given FormData object with the field's internal value.
-             */
-            fill(formData) {
-				let field = this.$refs['field-' + this.field.attribute];
-				field.fill(formData);
-            },
-        },
-    }
+	methods: {
+		/**
+		 * Set the initial, internal value for the field.
+		 */
+		setInitialValue() {
+			Object.values(this.fields).forEach(f => {
+				this.$set(this.field.value, f.attribute, f.value)
+			});
+			this.$refs['field-' + this.field.attribute].setInitialValue();
+		},
+
+		/**
+		 * Fill the given FormData object with the field's internal value.
+		 */
+		fill(formData) {
+			let field = this.$refs['field-' + this.field.attribute];
+			field.fill(formData);
+		},
+	},
+}
+
 </script>
