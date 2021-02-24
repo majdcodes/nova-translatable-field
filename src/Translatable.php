@@ -118,12 +118,32 @@ class Translatable extends Field
 
         foreach ($this->locales as $localeCode => $locale) {
             $value = $request->get($this->localizeAttribute($localeCode, $requestAttribute));
+
 			if ($value === 'true') {
 				$value = true;
 			}
-            if (is_null($value)){
-                continue;
-            }
+
+			// Flexible content hack!
+			if (is_array($value) && !empty($value)) {
+				foreach ($value as &$subitem) {
+					if (!empty($subitem['layout'])) {
+						$key = $subitem['key'];
+						foreach($subitem['attributes'] as $bad_key => $attribute_item) {
+							if (stripos($bad_key, $key) !== false) {
+								$new_key = explode('__', $bad_key);
+								$subitem['attributes'][$new_key[1]] = $attribute_item;
+								unset($subitem['attributes'][$bad_key]);
+							}
+						}
+					} else {
+						break;
+					}
+				}
+			}
+
+//            if (is_null($value)){
+//                continue;
+//            }
 
             $requestData[$requestAttribute] = $value;
             $request->replace($requestData);
