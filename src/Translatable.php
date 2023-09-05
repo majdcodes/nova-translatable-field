@@ -67,15 +67,20 @@ class Translatable extends Field
 	 */
 	public function resolve($resource, $attribute = null)
 	{
-		$defaultLocale = $resource->getDefaultLocale();
-
-		/** @var Field $field */
-		foreach ($this->fields as $localeCode => $field) {
-			$resource->setDefaultLocale($localeCode);
-			$field->resolve($resource, $this->field->attribute);
-		}
-
-		$resource->setDefaultLocale($defaultLocale);
+		if (method_exists($resource, 'getDefaultLocale')) {
+            $defaultLocale = $resource->getDefaultLocale();
+            /** @var Field $field */
+            foreach ($this->fields as $localeCode => $field) {
+                $resource->setDefaultLocale($localeCode);
+                $field->resolve($resource, $this->field->attribute);
+            }
+            $resource->setDefaultLocale($defaultLocale);
+        } else {
+            $defaultLocale = config('app.locale');
+			foreach ($this->fields as $localeCode => $field) {
+                $field->resolve($resource, $this->field->attribute);
+            }
+        }
 	}
 
 	public function canCopy()
